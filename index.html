@@ -32,21 +32,44 @@
       background: linear-gradient(135deg, #0d6efd15, #0d6efd25);
       border-left: 4px solid #0d6efd;
       border-radius: 8px;
+      padding: 15px;
+    }
+    .no-rek {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #0d6efd;
+    }
+    .notif-salin {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(25, 135, 84, 0.95);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 9999;
+      display: none;
     }
   </style>
 </head>
 <body class="bg-light py-4">
 
+  <!-- Notifikasi Berhasil Disalin -->
+  <div class="notif-salin" id="notifSalin">✅ Nomor Rekening Berhasil Disalin!</div>
+
   <!-- 📢 TULISAN BERJALAN -->
   <div class="marquee">
-    <span>🔥 OPEN PO PCB WAVEID V2 — SIAPKAN DAN ISI DATA DENGAN BENAR YA! 🔥</span>
+    <span>🔥 OPEN PO PCB WAVEID V2 — ISI DATA DENGAN BENAR YA! 🔥</span>
   </div>
 
   <div class="container mt-4" style="max-width:560px;">
     <div class="card shadow-lg overflow-hidden">
       
       <!-- HEADER -->
-      <div class="card-header bg-gradient text-white text-center py-4" style="background: linear-gradient(90deg, #212529, #343a40);">
+      <div class="card-header text-white text-center py-4" style="background: linear-gradient(90deg, #0a2463, #153a94);">
         <h4 class="mb-0">📝 Pesanan PCB WAVEID V2</h4>
         <p class="mb-0 small opacity-75">Silakan isi data diri dengan lengkap & benar</p>
       </div>
@@ -86,14 +109,19 @@
             </select>
           </div>
 
-          <!-- INFORMASI REKENING -->
-          <div class="rekening-box p-3 mb-3">
+          <!-- INFORMASI REKENING DENGAN TOMBOL SALIN -->
+          <div class="rekening-box mb-3">
             <div class="text-center mb-2">
-              <strong class="text-primary">💳 PEMBAYARAN KE REKENING:</strong>
+              <strong class="text-primary">💳 SILAKAN TRANSFER KE:</strong>
             </div>
             <div class="text-center">
-              <div class="fw-bold">Bank BCA</div>
-              <div class="fs-5 fw-bolder text-dark">5725774807</div>
+              <div class="fw-bold mb-1">Bank BCA</div>
+              <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
+                <span class="no-rek" id="noRekening">5725774807</span>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="salinNoRek()">
+                  📋 Salin
+                </button>
+              </div>
               <div class="text-muted">a.n: Eric Liyadi Abdillah</div>
             </div>
           </div>
@@ -115,6 +143,16 @@
 <script>
 const nomorWA = "6282175988678";
 
+// Fungsi Salin Nomor Rekening
+function salinNoRek() {
+  const noRek = document.getElementById('noRekening').innerText;
+  navigator.clipboard.writeText(noRek).then(() => {
+    const notif = document.getElementById('notifSalin');
+    notif.style.display = 'block';
+    setTimeout(() => { notif.style.display = 'none'; }, 2000);
+  });
+}
+
 document.getElementById('formPesanan').onsubmit = function(e){
   e.preventDefault();
   let nama = document.getElementById('nama').value;
@@ -132,11 +170,11 @@ document.getElementById('formPesanan').onsubmit = function(e){
 📦 Pesanan: ${jumlah} Pcs PCB WAVEID V2
 💰 Total Harga: Rp ${total.toLocaleString('id-ID')}
 
-💳 Pembayaran ke BCA: 5725774807 a.n Eric Liyadi Abdillah
+💳 Pembayaran: BCA 5725774807 a.n Eric Liyadi Abdillah
 
 ⚠️ Catatan: Harga belum termasuk ongkir, ongkir dibayar saat terima barang ya.
 
-Terima kasih atas pesanannya!`;
+Terima kasih!`;
 
   window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
 };
