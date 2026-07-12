@@ -7,77 +7,110 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .marquee {
-      background: #ffc107;
-      color: #000;
-      padding: 8px;
+      background: linear-gradient(90deg, #ffc107, #ffdd57, #ffc107);
+      color: #212529;
+      padding: 10px;
       font-weight: bold;
       text-align: center;
       overflow: hidden;
       white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .marquee span {
       display: inline-block;
-      animation: jalan 20s linear infinite; /* ⏩ Diperlambat jadi 20 detik */
+      animation: jalan 22s linear infinite;
     }
     @keyframes jalan {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
+    .card {
+      border: none;
+      border-radius: 12px;
+    }
+    .rekening-box {
+      background: linear-gradient(135deg, #0d6efd15, #0d6efd25);
+      border-left: 4px solid #0d6efd;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body class="bg-light py-4">
 
-  <!-- 📢 TULISAN BERJALAN SUDAH DIGANTI & DIPERLAMBAT -->
+  <!-- 📢 TULISAN BERJALAN -->
   <div class="marquee">
-    <span>🔥 OPEN PO PCB WAVEID V2 </span>
+    <span>🔥 OPEN PO PCB WAVEID V2 — SIAPKAN DAN ISI DATA DENGAN BENAR YA! 🔥</span>
   </div>
 
-<div class="container mt-3" style="max-width:550px;">
-  <div class="card shadow">
-    <div class="card-header bg-dark text-white text-center">
-      <h4>📝 Pesanan PCB WAVEID V2</h4>
-    </div>
-    <div class="card-body">
-      <form id="formPesanan">
-        <div class="mb-3">
-          <label>Nama Lengkap</label>
-          <input type="text" id="nama" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label>No HP Aktif</label>
-          <input type="tel" id="no_hp" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label>Alamat Lengkap Pengiriman</label>
-          <textarea id="alamat" class="form-control" rows="2" required placeholder="Jalan, RT/RW, Kecamatan, Kota"></textarea>
-        </div>
+  <div class="container mt-4" style="max-width:560px;">
+    <div class="card shadow-lg overflow-hidden">
+      
+      <!-- HEADER -->
+      <div class="card-header bg-gradient text-white text-center py-4" style="background: linear-gradient(90deg, #212529, #343a40);">
+        <h4 class="mb-0">📝 Pesanan PCB WAVEID V2</h4>
+        <p class="mb-0 small opacity-75">Silakan isi data diri dengan lengkap & benar</p>
+      </div>
 
-        <hr>
-        <div class="alert alert-info text-center">
-          <strong>Barang: PCB WAVEID V2</strong><br>
-          Harga: Rp 35.000 / pcs<br>
-          <small>MAKSIMAL PRMBELIAN 2 PCS</small>
-        </div>
+      <div class="card-body p-4">
+        <form id="formPesanan">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">👤 Nama Lengkap</label>
+            <input type="text" id="nama" class="form-control shadow-sm" placeholder="Contoh: Budi Santoso" required>
+          </div>
 
-        <div class="mb-3">
-          <label>Jumlah Pesanan</label>
-          <select id="jumlah" class="form-select" required>
-            <option value="">-- Pilih Jumlah --</option>
-            <option value="1">1 Pcs - Rp 35.000</option>
-            <option value="2">2 Pcs - Rp 70.000</option>
-          </select>
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">📞 No HP Aktif</label>
+            <input type="tel" id="no_hp" class="form-control shadow-sm" placeholder="Contoh: 081234567890" required>
+          </div>
 
-        <div class="alert alert-warning text-center py-2">
-           ⚠️ CATATAN : HARGA DI ATAS <strong>BELUM TERMASUKI ONGKIR</strong>
-           ⚠️<strong>TRANSFER HANYA KE 1 ADMIN<strong></strong>
-        </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">📍 Alamat Lengkap Pengiriman</label>
+            <textarea id="alamat" class="form-control shadow-sm" rows="2" required placeholder="Jalan, RT/RW, Kecamatan, Kota, Kode Pos"></textarea>
+          </div>
 
-        <button type="submit" class="btn btn-success w-100 py-2">📲 Kirim Pesanan ke WA</button>
-      </form>
+          <hr class="my-4">
+
+          <!-- INFO BARANG & HARGA -->
+          <div class="alert alert-primary text-center py-3 mb-4">
+            <strong class="fs-6">📦 Barang: PCB WAVEID V2</strong>
+            <div class="mt-2 fs-5 fw-bold text-success">Rp 35.000 / pcs</div>
+            <div class="small mt-1 text-danger fw-semibold">⚠️ MAKSIMAL PEMBELIAN 2 PCS SAJA</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">🛒 Jumlah Pesanan</label>
+            <select id="jumlah" class="form-select shadow-sm" required>
+              <option value="">-- Pilih Jumlah Pesanan --</option>
+              <option value="1">1 Pcs = Rp 35.000</option>
+              <option value="2">2 Pcs = Rp 70.000</option>
+            </select>
+          </div>
+
+          <!-- INFORMASI REKENING -->
+          <div class="rekening-box p-3 mb-3">
+            <div class="text-center mb-2">
+              <strong class="text-primary">💳 PEMBAYARAN KE REKENING:</strong>
+            </div>
+            <div class="text-center">
+              <div class="fw-bold">Bank BCA</div>
+              <div class="fs-5 fw-bolder text-dark">5725774807</div>
+              <div class="text-muted">a.n: Eric Liyadi Abdillah</div>
+            </div>
+          </div>
+
+          <!-- PERINGATAN -->
+          <div class="alert alert-warning text-center py-2 small mb-4">
+            ⚠️ Harga di atas <strong>BELUM TERMASUK ONGKIR</strong><br>
+            ⚠️ Hanya transfer ke rekening di atas / Admin resmi
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 py-3 fw-bold shadow-sm">
+            📲 Kirim Pesanan ke WhatsApp
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 <script>
 const nomorWA = "6282175988678";
@@ -91,6 +124,7 @@ document.getElementById('formPesanan').onsubmit = function(e){
   let total = jumlah * 35000;
 
   let pesan = `🔔 *PESANAN BARU PCB WAVEID V2*
+
 👤 Nama: ${nama}
 📞 No HP: ${hp}
 📍 Alamat: ${alamat}
@@ -98,9 +132,11 @@ document.getElementById('formPesanan').onsubmit = function(e){
 📦 Pesanan: ${jumlah} Pcs PCB WAVEID V2
 💰 Total Harga: Rp ${total.toLocaleString('id-ID')}
 
+💳 Pembayaran ke BCA: 5725774807 a.n Eric Liyadi Abdillah
+
 ⚠️ Catatan: Harga belum termasuk ongkir, ongkir dibayar saat terima barang ya.
 
-Terima kasih!`;
+Terima kasih atas pesanannya!`;
 
   window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
 };
