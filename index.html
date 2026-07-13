@@ -3,190 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Pesanan PCB WAVEID V2</title>
+  <title>PO Ditutup - PCB WAVEID V2</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .marquee {
-      background: linear-gradient(90deg, #ffc107, #ffdd57, #ffc107);
-      color: #212529;
-      padding: 10px;
-      font-weight: bold;
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .marquee span {
-      display: inline-block;
-      animation: jalan 22s linear infinite;
-    }
-    @keyframes jalan {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0a2463, #153a94);
+      padding: 20px;
     }
     .card {
+      border-radius: 16px;
       border: none;
-      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      max-width: 480px;
+      width: 100%;
     }
-    .rekening-box {
-      background: linear-gradient(135deg, #0d6efd15, #0d6efd25);
-      border-left: 4px solid #0d6efd;
-      border-radius: 8px;
-      padding: 15px;
+    .icon-tutup {
+      font-size: 4rem;
     }
-    .no-rek {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: #0d6efd;
+    .btn-wa {
+      background-color: #25D366;
+      border: none;
     }
-    .notif-salin {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(25, 135, 84, 0.95);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: bold;
-      z-index: 9999;
-      display: none;
+    .btn-wa:hover {
+      background-color: #1da851;
+    }
+    .btn-fb {
+      background-color: #1877F2;
+      border: none;
+    }
+    .btn-fb:hover {
+      background-color: #1565cc;
     }
   </style>
 </head>
-<body class="bg-light py-4">
+<body>
 
-  <!-- Notifikasi Berhasil Disalin -->
-  <div class="notif-salin" id="notifSalin">✅ Nomor Rekening Berhasil Disalin!</div>
+<div class="card p-4 text-center">
+  <div class="icon-tutup mb-3">🔒</div>
+  <h3 class="fw-bold text-danger mb-4">CLOSE PO PCB</h3>
 
-  <!-- 📢 TULISAN BERJALAN -->
-  <div class="marquee">
-    <span>🔥 OPEN PO PCB WAVEID V2 — PO DITUTUP SENIN JAM 22.00! SEGERA LAKUKAN PEMBAYARAN YA! 🔥</span>
+  <div class="alert alert-primary py-3 mb-4 text-start">
+    Jika berminat, nantikan kembali pembukaan PO PCB kami berikutnya ya.
   </div>
 
-  <div class="container mt-4" style="max-width:560px;">
-    <div class="card shadow-lg overflow-hidden">
-      
-      <!-- HEADER -->
-      <div class="card-header text-white text-center py-4" style="background: linear-gradient(90deg, #0a2463, #153a94);">
-        <h4 class="mb-0">📝 Pesanan PCB WAVEID V2</h4>
-        <p class="mb-0 small opacity-75">Silakan isi data diri dengan lengkap & benar</p>
-      </div>
-
-      <div class="card-body p-4">
-        <form id="formPesanan">
-          <div class="mb-3">
-            <label class="form-label fw-semibold">👤 Nama Lengkap</label>
-            <input type="text" id="nama" class="form-control shadow-sm" placeholder="Contoh: Budi Santoso" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label fw-semibold">📞 No HP Aktif</label>
-            <input type="tel" id="no_hp" class="form-control shadow-sm" placeholder="Contoh: 081234567890" required>
-          </div>
-
-          <div class="mb-4">
-            <label class="form-label fw-semibold">📍 Alamat Lengkap Pengiriman</label>
-            <textarea id="alamat" class="form-control shadow-sm" rows="2" required placeholder="Jalan, RT/RW, Kecamatan, Kota, Kode Pos"></textarea>
-          </div>
-
-          <hr class="my-4">
-
-          <!-- INFO BATAS WAKTU PO -->
-          <div class="alert alert-danger text-center py-2 mb-3 small">
-            ⏰ <strong>PEMBERITAHUAN WAKTU:</strong><br>
-            PO akan kami tutup pada <strong>Senin pukul 22.00 WIB</strong><br>
-            Setelah isi formulir diharapkan segera melakukan transfer.<br>
-            <strong>Transfer di atas jam 22.00 akan kami refund.</strong>
-          </div>
-
-          <!-- INFO BARANG & HARGA -->
-          <div class="alert alert-primary text-center py-3 mb-4">
-            <strong class="fs-6">📦 Barang: PCB WAVEID V2</strong>
-            <div class="mt-2 fs-5 fw-bold text-success">Rp 35.000 / pcs</div>
-            <div class="small mt-1 text-danger fw-semibold">⚠️ MAKSIMAL PEMBELIAN 2 PCS SAJA</div>
-          </div>
-
-          <div class="mb-4">
-            <label class="form-label fw-semibold">🛒 Jumlah Pesanan</label>
-            <select id="jumlah" class="form-select shadow-sm" required>
-              <option value="">-- Pilih Jumlah Pesanan --</option>
-              <option value="1">1 Pcs = Rp 35.000</option>
-              <option value="2">2 Pcs = Rp 70.000</option>
-            </select>
-          </div>
-
-          <!-- INFORMASI REKENING DENGAN TOMBOL SALIN -->
-          <div class="rekening-box mb-3">
-            <div class="text-center mb-2">
-              <strong class="text-primary">💳 SILAKAN TRANSFER KE:</strong>
-            </div>
-            <div class="text-center">
-              <div class="fw-bold mb-1">Bank BCA</div>
-              <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
-                <span class="no-rek" id="noRekening">5725774807</span>
-                <button type="button" class="btn btn-sm btn-outline-primary" onclick="salinNoRek()">
-                  📋 Salin
-                </button>
-              </div>
-              <div class="text-muted">a.n: Eric Liyadi Abdillah</div>
-            </div>
-          </div>
-
-          <!-- PERINGATAN -->
-          <div class="alert alert-warning text-center py-2 small mb-4">
-            ⚠️ Harga di atas <strong>BELUM TERMASUK ONGKIR</strong><br>
-            ⚠️ Hanya transfer ke rekening di atas / Admin resmi
-          </div>
-
-          <button type="submit" class="btn btn-success w-100 py-3 fw-bold shadow-sm">
-            📲 Kirim Pesanan ke WhatsApp
-          </button>
-        </form>
-      </div>
-    </div>
+  <div class="alert alert-info py-3 mb-4 text-start">
+    Pantau terus informasi terbaru melalui tautan di bawah ini:
   </div>
 
-<script>
-const nomorWA = "6282175988678";
+  <!-- TOMBOL LINK YANG DIMINTA -->
+  <div class="d-grid gap-2 mb-4">
+    <a href="https://chat.whatsapp.com/HUoUZst6V7I5GOAQFnGmJg?s=cl&p=a&ilr=0" target="_blank" class="btn btn-wa text-white py-2 fw-semibold">
+      💬 Grup WhatsApp
+    </a>
+    <a href="https://www.facebook.com/share/g/18srqwXefL/" target="_blank" class="btn btn-fb text-white py-2 fw-semibold">
+      📘 Grup Facebook
+    </a>
+  </div>
 
-// Fungsi Salin Nomor Rekening
-function salinNoRek() {
-  const noRek = document.getElementById('noRekening').innerText;
-  navigator.clipboard.writeText(noRek).then(() => {
-    const notif = document.getElementById('notifSalin');
-    notif.style.display = 'block';
-    setTimeout(() => { notif.style.display = 'none'; }, 2000);
-  });
-}
+  <hr class="my-3">
+  <p class="text-muted small mb-0">Terima kasih atas antusiasme kalian semua 🙏</p>
+</div>
 
-document.getElementById('formPesanan').onsubmit = function(e){
-  e.preventDefault();
-  let nama = document.getElementById('nama').value;
-  let hp = document.getElementById('no_hp').value;
-  let alamat = document.getElementById('alamat').value;
-  let jumlah = document.getElementById('jumlah').value;
-  let total = jumlah * 35000;
-
-  let pesan = `🔔 *PESANAN BARU PCB WAVEID V2*
-
-👤 Nama: ${nama}
-📞 No HP: ${hp}
-📍 Alamat: ${alamat}
-
-📦 Pesanan: ${jumlah} Pcs PCB WAVEID V2
-💰 Total Harga: Rp ${total.toLocaleString('id-ID')}
-
-💳 Pembayaran: BCA 5725774807 a.n Eric Liyadi Abdillah
-
-⏰ Catatan: Batas waktu pembayaran sebelum Senin pukul 22.00 WIB. Transfer lewat jam tersebut akan direfund.
-⚠️ Harga belum termasuk ongkir, ongkir dibayar saat terima barang ya.
-
-Terima kasih!`;
-
-  window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
-};
-</script>
 </body>
 </html>
